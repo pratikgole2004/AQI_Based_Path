@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>AQI Route Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="app-container">
+        <div id="controls">
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="start">Start Location</label>
+                    <input type="text" id="start" placeholder="e.g. Pune Airport">
+                </div>
+                <div class="input-group">
+                    <label for="end">End Location</label>
+                    <input type="text" id="end" placeholder="e.g. Shivaji Nagar">
+                </div>
+                <button id="find-route">Find Route</button>
+            </div>
+            <div id="status"></div>
+        </div>
+        <div id="map"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
