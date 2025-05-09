@@ -5,26 +5,95 @@
     <title>AQI Route Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
     <div id="app-container">
-        <div id="controls">
-            <div class="input-row">
+        <div id="sidebar">
+            <div class="sidebar-header">
+                <h1>AQI Route Finder</h1>
+                <p class="subtitle">Find the healthiest route to your destination</p>
+            </div>
+            
+            <div class="input-section">
                 <div class="input-group">
-                    <label for="start">Start Location</label>
+                    <label for="start">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Start Location
+                    </label>
                     <input type="text" id="start" placeholder="e.g. Pune Airport">
                 </div>
                 <div class="input-group">
-                    <label for="end">End Location</label>
+                    <label for="end">
+                        <i class="fas fa-flag-checkered"></i>
+                        End Location
+                    </label>
                     <input type="text" id="end" placeholder="e.g. Shivaji Nagar">
                 </div>
-                <button id="find-route">Find Route</button>
             </div>
+
+            <div class="preferences-section">
+                <h3>Route Preferences</h3>
+                <div class="preference-group">
+                    <label class="toggle">
+                        <input type="checkbox" id="avoid-high-aqi">
+                        <span class="slider"></span>
+                        <span class="label">Avoid High AQI Areas</span>
+                    </label>
+                </div>
+                <div class="preference-group">
+                    <label>Route Type:</label>
+                    <select id="route-type">
+                        <option value="balanced">Balanced (AQI + Distance)</option>
+                        <option value="aqi">Best AQI Only</option>
+                        <option value="distance">Shortest Distance</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="find-route" class="primary-button">
+                <i class="fas fa-route"></i>
+                Find Route
+            </button>
+
+            <div id="route-info" class="hidden">
+                <h3>Route Information</h3>
+                <div class="info-card">
+                    <div class="info-item">
+                        <i class="fas fa-wind"></i>
+                        <span>Average AQI: <span id="avg-aqi">-</span></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-road"></i>
+                        <span>Distance: <span id="route-distance">-</span></span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: <span id="route-duration">-</span></span>
+                    </div>
+                </div>
+            </div>
+
             <div id="status"></div>
         </div>
+
         <div id="map"></div>
+        
+        <div id="loader" class="hidden">
+            <div class="spinner"></div>
+            <span>Calculating AQI-safe routes...</span>
+        </div>
+
+        <div id="map-controls">
+            <button id="locate-me" class="map-control-button" title="Locate Me">
+                <i class="fas fa-location-arrow"></i>
+            </button>
+            <button id="toggle-layers" class="map-control-button" title="Toggle Layers">
+                <i class="fas fa-layer-group"></i>
+            </button>
+        </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
